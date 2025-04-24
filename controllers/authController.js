@@ -8,10 +8,7 @@ exports.login = async (req, res, next) => {
 
     res.status(200).json({
       status: 'success',
-      token: result.token,
-      data: {
-        user: result.user
-      }
+      token: result.token
     });
   } catch (err) {
     let statusCode = 500;

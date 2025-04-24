@@ -1,31 +1,35 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
-const connectDB = require('./config/db'); // Make sure this path is correct
+const connectDB = require('./config/db');
 
 const app = express();
 
-// Connect to Database
-connectDB(); // This should now work
+// Connect to MongoDB
+connectDB();
 
 // Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json()); // no need for body-parser in modern Express
 
+// Routes
 const userRoutes = require('./routes/userRoutes');
-
 const authRoutes = require('./routes/authRoutes');
+const jobRoutes = require('./routes/jobRoutes');
+const applicationRoutes = require('./routes/applicationRoutes');
 
-app.use('/', userRoutes); 
-app.use('/',authRoutes);
+app.use('/', userRoutes);         
+app.use('', authRoutes);         
+app.use('/', jobRoutes);           
+app.use('/', applicationRoutes); 
 
-// Test route
+// Root route
 app.get('/', (req, res) => {
-  res.send('API is running...');
+  res.send('Job Portal API is running...');
 });
 
+// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on http://localhost:${PORT}`);
 });

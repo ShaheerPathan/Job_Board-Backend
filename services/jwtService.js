@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const AppError = require('../utils/AppError');
 require('dotenv').config();
 
 class JwtService {
