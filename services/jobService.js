@@ -1,8 +1,30 @@
-const Job = require('../models/job');
+const Job = require('../models/Job');
 
-const createJob = (data) => Job.create(data);
-const getJobs = (filter = {}) => Job.find(filter).populate('employer', 'fullname');
-const updateJob = (id, data) => Job.findByIdAndUpdate(id, data, { new: true });
-const deleteJob = (id) => Job.findByIdAndDelete(id);
+const createJob = async (jobData) => {
+  const job = new Job(jobData);
+  return await job.save();
+};
 
-module.exports = { createJob, getJobs, updateJob, deleteJob };
+const getAllJobs = async () => {
+  return await Job.find().populate('createdBy', 'fullname email');
+};
+
+const findJobById = async (id) => {
+  return await Job.findById(id);
+};
+
+const updateJobById = async (id, updateData) => {
+  return await Job.findByIdAndUpdate(id, updateData, { new: true });
+};
+
+const deleteJobById = async (id) => {
+  return await Job.findByIdAndDelete(id);
+};
+
+module.exports = {
+  createJob,
+  getAllJobs,
+  findJobById,
+  updateJobById,
+  deleteJobById
+};

@@ -1,12 +1,19 @@
 const mongoose = require('mongoose');
+const { timeStamp } = require('node:console');
 
-const jobSchema = new mongoose.Schema({
+const jobsSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: String,
   location: String,
-  jobType: String,
-  employer: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  createdAt: { type: Date, default: Date.now },
+  jobType: {
+    type: String,
+    enum: ['Full-Time', 'Part-Time', 'Remote'],
+    required: true
+  },
+  employer: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
+},
+{
+  timeStamp:true
 });
 
-module.exports = mongoose.model('Job', jobSchema);
+module.exports = mongoose.model('Job', jobsSchema);

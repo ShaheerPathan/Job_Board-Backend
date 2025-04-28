@@ -19,7 +19,7 @@ const jobRoutes = require('./routes/jobRoutes');
 const applicationRoutes = require('./routes/applicationRoutes');
 
 app.use('/', userRoutes);         
-app.use('', authRoutes);         
+app.use('/', authRoutes);         
 app.use('/', jobRoutes);           
 app.use('/', applicationRoutes); 
 
