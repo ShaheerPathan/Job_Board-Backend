@@ -23,8 +23,8 @@ const deleteJobById = async (id) => {
 
 module.exports = {
   createJob,
-  getAlxlJobs,
-  findJxobById,
+  getAllJobs,
+  findJobById,
   updateJobById,
   deleteJobById
 };
